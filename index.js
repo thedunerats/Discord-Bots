@@ -87,7 +87,7 @@ client.on('message', msg => {
     let args = msg.content.substring(PREFIX.length).split(" ");
 
     // create a new string to send suggestions for. Args[1] will not work. cut off everything ater first space.
-
+    // had to experiment to find 8. nothing else worked. borrowed from a tutorial.
     var suggestion = msg.content.substring(8);
 
     switch(args[0]){
@@ -96,14 +96,26 @@ client.on('message', msg => {
       // need to delete the message after posting it though. And change reply to a DM.
     case 'suggest':
       if (msg.channel.id === '482927652907253797'){
-        client.channels.get(`616689616631627779`).send(suggestion); // get channel by Id, from developer mode
+        client.channels.get(`616689616631627779`).send('SUGGESTION: ' + suggestion); // get channel by Id, from developer mode
         msg.author.send('Thanks for your input. It really helps!');
         msg.delete();
       } else {
-        msg.author.send("please use the suggestions channel for that. Thank you!");
+        msg.author.send("Please use the suggestions channel for that. Thank you!");
         msg.delete();
       }
       break;
+
+      //this one is for complaints / incidents
+      case 'report':
+        if (msg.channel.id === '482927652907253797'){
+          client.channels.get(`616689616631627779`).send('REPORT: ' + suggestion); // get channel by Id, from developer mode
+          msg.author.send('Thanks for your input. It really helps!');
+          msg.delete();
+        } else {
+          msg.author.send("Please use the suggestions channel for that. Thank you!");
+          msg.delete();
+        }
+        break;  
   
     case "yaboii":
       msg.reply("YA BOIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
@@ -126,4 +138,4 @@ client.on('message', msg => {
 
 })
 
-client.login('NjQwOTQxMTkyNzM3MTk0MDAz.XcBKPg.YckhaurkWqd3faYX4k2edlqfj-I')
+client.login('NjQwOTQxMTkyNzM3MTk0MDAz.XkNOQQ.RoKrjXyCFzUPQ4egkpElfPknO5g');
